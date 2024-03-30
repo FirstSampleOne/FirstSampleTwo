@@ -2,7 +2,11 @@
     "name": "PROFESSOR-BOT",
     "description": "The Telegram Autofilter Bot",
     "logo": "https://graph.org/file/b7e8484f6395a180b6380.jpg",
-    "keywords": ["Telegram", "auto-filter", "MrMKN"],
+    "keywords": [
+        "Telegram",
+        "auto-filter",
+        "MrMKN"
+    ],
     "repository": "https://github.com/MrMKN/PROFESSOR-BOT",
     "env": {
         "WEBHOOK": {
@@ -44,12 +48,12 @@
         },
         "LOG_CHANNEL": {
             "description": "Bot Logs,Give a channel id with -100xxxxxxx",
-            "required": true                              
+            "required": true
         },
         "AUTH_CHANNEL": {
             "description": "ID of channel.Make sure bot is admin in this channel. Without subscribing this channel users cannot use bot.",
             "required": false
-        },           
+        },
         "MAX_RIST_BTNS": {
             "description": "Maximum number of serch result buttons count ⚠️below 10 only ",
             "value": "10",
@@ -72,7 +76,7 @@
         "COLLECTION_NAME": {
             "description": "Name of the collections. Defaults to Telegram_files. If you are using the same database, then use different collection name for each bot",
             "value": "Telegram_files",
-            "required": false        
+            "required": false
         },
         "SUPPORT_CHAT": {
             "description": "Updated Channel Username Without @ Not Chanel ID",
@@ -82,33 +86,33 @@
         "IMDB": {
             "description": "Imdb, the view of information when making True/False",
             "value": "True",
-            "required": false     
+            "required": false
         },
         "PM_IMDB": {
             "description": "pm Imdb, the view of information when making True/False",
             "value": "True",
-            "required": false     
+            "required": false
         },
         "IMDB_TEMPLATE": {
             "description": "Custom IMDB Template",
-            "value": "<b>Qᴜᴇʀʏ: {query}</b>\n\n🏷 Tɪᴛʟᴇ: <a href={url}>{title}</a>\n🎭 Gᴇɴʀᴇꜱ: {genres}\n📆 Yᴇᴀʀ: <a href={url}/releaseinfo>{year}</a>\n🌟 Rᴀᴛɪɴɢ: <a href={url}/ratings>{rating}</a>/10",        
+            "value": "<b>Qᴜᴇʀʏ: {query}</b>\n\n🏷 Tɪᴛʟᴇ: <a href={url}>{title}</a>\n🎭 Gᴇɴʀᴇꜱ: {genres}\n📆 Yᴇᴀʀ: <a href={url}/releaseinfo>{year}</a>\n🌟 Rᴀᴛɪɴɢ: <a href={url}/ratings>{rating}</a>/10",
             "required": false
-        }, 
+        },
         "IMDB_DELET_TIME": {
             "description": "bot risult aouto delet time in second do to avoid group copyright issue. default is 300 ",
             "value": "300",
-            "required": false  
+            "required": false
         },
         "SINGLE_BUTTON": {
             "description": "choose b/w single or double buttons https://github.com/Aadhi000/Ajax/issues/22",
             "value": "True",
-            "required": false         
+            "required": false
         },
         "START_MESSAGE": {
             "description": "bot start message text [ {user} = bot startd user name {bot} = your bot name",
             "value": "<b>✨ Hᴇʟʟᴏ {user}.\n\nMʏ Nᴀᴍᴇ Is {bot}.\n\nI Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇ Fᴏʀ Yᴏᴜ Jᴜsᴛ Aᴅᴅ Mᴇ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Oʀ Jᴏɪɴ Oᴜʀ Gʀᴏᴜᴘ</b>",
             "required": false
-        },       
+        },
         "FORCE_SUB_TEXT": {
             "description": "custom force sub text (use ** = bold / use ``=  mono)",
             "value": "Sᴏʀʀʏ Bʀᴏ Yᴏᴜʀ Nᴏᴛ Jᴏɪɴᴇᴅ Mʏ Cʜᴀɴɴᴇʟ Sᴏ Pʟᴇᴀsᴇ Cʟɪᴄᴋ Jᴏɪɴ Bᴜᴛᴛᴏɴ Tᴏ Jᴏɪɴ Mʏ Cʜᴀɴɴᴇʟ Aɴᴅ Tʀʏ Aɢᴀɪɴ",
@@ -151,21 +155,17 @@
         },
         "RemoveBG_API": {
             "description": "background remover website api key. get from https://www.remove.bg/b/background-removal-api",
-            "required": false 
+            "required": false
         },
-        "P_TTI_SHOW_OFF": { 
+        "P_TTI_SHOW_OFF": {
             "description": "Customize Result Buttons to Callback or Url by (True = url / False = callback)",
             "value": "True",
             "required": false
         }
     },
-    "buildpacks":
-        [
-            {"url": "heroku/python"}
-        ]      
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
 }
-
-
-
-
-

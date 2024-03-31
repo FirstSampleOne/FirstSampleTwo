@@ -45,7 +45,13 @@ async def is_subscribed(bot, query):
             return True
     return False
 
-
+async def delete_file_after_delay(client, file_id, delay):
+    await asyncio.sleep(delay)
+    try:
+        await client.delete_messages(chat_id=query.from_user.id, message_ids=file_id)
+    except Exception as e:
+        print(f"Error deleting file: {e}")
+        
 async def get_poster(query, bulk=False, id=False, file=None):
     imdb = Cinemagoer() 
     if not id:   

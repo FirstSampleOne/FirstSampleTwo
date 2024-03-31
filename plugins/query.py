@@ -8,7 +8,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerId
 
 # Helper Function
 from Script import script
-from utils import get_size, is_subscribed, get_poster, search_gagala, temp, delete_file_after_delay, get_settings, save_group_settings, get_shortlink, get_time, humanbytes 
+from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings, get_shortlink, get_time, humanbytes 
 from .ExtraMods.carbon import make_carbon
 
 # Database Function 
@@ -175,7 +175,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 return await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
             else:
                 await client.send_cached_media(chat_id=query.from_user.id, file_id=file_id, caption=f_caption, protect_content=True if ident == "pmfilep" else False)
-                asyncio.create_task(delete_file_after_delay(client, file_id, 60))  # 60 seconds = 30 minutes
         except Exception as e:
             await query.answer(f"⚠️ Eʀʀᴏʀ {e}", show_alert=True)
     
@@ -202,7 +201,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             else:
                 await client.send_cached_media(chat_id=query.from_user.id, file_id=file_id, caption=f_caption, protect_content=True if ident == "filep" else False)
                 await query.answer('Cʜᴇᴄᴋ PM, I Hᴀᴠᴇ Sᴇɴᴛ Fɪʟᴇs Iɴ Pᴍ', show_alert=True)
-                asyncio.create_task(delete_file_after_delay(client, file_id, 60))  # 60 seconds = 30 minutes
         except UserIsBlocked:
             await query.answer('Uɴʙʟᴏᴄᴋ Tʜᴇ Bᴏᴛ Mᴀʜɴ !', show_alert=True)
         except PeerIdInvalid:
@@ -224,7 +222,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             try: f_caption = CUSTOM_FILE_CAPTION.format(mention=query.from_user.mention, file_name='' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)  
             except Exception as e: logger.exception(e)
         await client.send_cached_media(chat_id=query.from_user.id, file_id=file_id, caption=f_caption, protect_content=True if ident == 'checksubp' else False)
-        asyncio.create_task(delete_file_after_delay(client, file_id, 60))  # 60 seconds = 30 minutes
     
     elif query.data == "removebg":
         buttons = [[

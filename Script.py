@@ -1,11 +1,9 @@
-class script(object):  
-    START_TXT = """<b>✨ Hᴇʟʟᴏ {user}.
+class script(object):
+    START_TXT = """<b>Hᴇʟʟᴏ {},
+Mʏ Nᴀᴍᴇ Is <a href=https://t.me/{}>{}</a>, I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇs, Jᴜsᴛ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ Aɴᴅ Eɴᴊᴏʏ 😍...</b>"""
 
-Mʏ Nᴀᴍᴇ Is {bot}.
-
-I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇ Fᴏʀ Yᴏᴜ Jᴜsᴛ Aᴅᴅ Mᴇ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Oʀ Jᴏɪɴ Oᴜʀ Gʀᴏᴜᴘ</b>"""
-    
-    HELP_TXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
+    HELP_TXT = """<b>Hᴇʏ {},
+Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
     ABOUT_TXT = """<b>✯ Mʏ ɴᴀᴍᴇ: {}
 ✯ Dᴇᴠᴇʟᴏᴩᴇʀ: <a herf=https://t.me/iPepkornUpdate>ɪPᴇᴘᴋᴏʀɴUᴘᴅᴀᴛᴇ</a>
@@ -130,23 +128,96 @@ Tʜɪs Mᴏᴅᴜʟᴇ Oɴʟʏ Wᴏʀᴋs Fᴏʀ Mʏ Aᴅᴍɪɴs
 ◉ ᴜꜱᴇᴅ ᴅʙ ꜱɪᴢᴇ: <code>{}</code>
 ◉ ꜰᴇᴇᴇ ᴅʙ ꜱɪᴢᴇ: <code>{}</code></b>"""
 
-    LOG_TEXT_G = """<b>#ɴᴇᴡ_ɢʀᴏᴜᴩ
+    LOG_TEXT_G = """#NewGroup 😎
 
-◉ ɢʀᴏᴜᴩ: {a}
-◉ ɢ-ɪᴅ: <code>{b}</code>
-◉ ʟɪɴᴋ: @{c}
-◉ ᴍᴇᴍʙᴇʀꜱ: <code>{d}</code>
-◉ ᴀᴅᴅᴇᴅ ʙʏ: {e}
+Group: {a}
+Group ID: <code>{b}</code>
+Group UN: @{c}
 
-◉ ʙʏ: @{f}</b>"""
-  
-    LOG_TEXT_P = """#ɴᴇᴡ_ᴜꜱᴇʀ
+Total Members: <code>{d}</code>
+Total Groups: <code>{e}</code>
+Today Groups: <code>{f}</code>
+
+Date: <code>{g}</code>
+Time: <code>{h}</code>
+
+Added By: {i}
+By {j}
+
+#{k}
+#Chats_{k}
+"""
     
-◉ ᴜꜱᴇʀ-ɪᴅ: <code>{}</code>
-◉ ᴀᴄᴄ-ɴᴀᴍᴇ: {}
-◉ ᴜꜱᴇʀɴᴀᴍᴇ: @{}
+    LOG_TEXT_P = """NewUsers 😀
+    
+ID: <code>{a}</code>
+Name: {b}
+Username: @{c}
 
-◉ ʙʏ: @{}</b>"""
+Total Users: {d}
+Today Users: {e}
+
+Date: <code>{f}</code>
+Time: <code>{g}</code>
+
+By {h}
+#{i}
+#Users_{i}
+"""
+    
+    NEW_MEMBER = """#NewMember 😀
+
+Group = {a}
+Group ID = <code>{b}</code>
+Group UN = @{c}
+Total Member = <code>{d}</code>
+Invite = {e}
+           
+Member = {f}
+Member ID = <code>{g}</code>
+Member UN = @{h}
+
+Date = <code>{i}</code>
+Time = <code>{j}</code>
+
+#{k}
+#NewMem_{k}
+"""
+
+    LEFT_MEMBER = """#LeftMember 😔
+
+Group = {a}
+Group ID = <code>{b}</code>
+Group UN = @{c}
+Total Member = <code>{d}</code>
+Invite = {e}
+           
+Member = {f}
+Member ID = <code>{g}</code>
+Member UN = @{h}
+
+Date = <code>{i}</code>
+Time = <code>{j}</code>
+
+#{k}
+#LeftMem_{k}
+"""
+
+    REPORT_TXT = """#Daily_Report
+
+Date = {a}
+Time = {c}
+
+Total
+Total Users = <code>{d}</code>
+Total Chats = <code>{e}</code>
+
+Yesterday
+{b} Users = <code>{f}</code>
+{b} Chats = <code>{g}</code>
+
+#{h}
+#Report_{h}"""
   
     GROUPMANAGER_TXT = """<b>Hᴇʟᴩ Fᴏʀ GʀᴏᴜᴩMᴀɴᴀɢᴇʀ</b>
 
@@ -218,9 +289,20 @@ Wᴇʟᴄᴏᴍᴇ ᴛᴏ {chat}.
 
 ꜱʜᴀʀᴇ & ꜱᴜᴩᴩᴏʀᴛ, ʀᴇqᴜᴇꜱᴛ ʏᴏᴜ ᴡᴀɴᴛᴇᴅ ᴍᴏᴠɪᴇꜱ"""
   
-    IMDB_TEMPLATE = """<b>Qᴜᴇʀʏ: {query}</b>
+    IMDB_TEMPLATE = """<b>Query: {query}</b>
 
-🏷 Tɪᴛʟᴇ: <a href={url}>{title}</a>
-🎭 Gᴇɴʀᴇꜱ: {genres}
-📆 Yᴇᴀʀ: <a href={url}/releaseinfo>{year}</a>
-🌟 Rᴀᴛɪɴɢ: <a href={url}/ratings>{rating}</a>/10"""
+🏷 Title: <a href={url}>{title}</a>
+🎭 Genres: {genres}
+📆 Year: <a href={url}/releaseinfo>{year}</a>
+🌟 Rating: <a href={url}/ratings>{rating}</a>/10
+"""
+
+    RESTART_TXT = """#Restarted
+
+🔄 Bot Restarted!
+📅 Date: <code>{a}</code>
+⏰ Time: <code>{b}</code>
+🌐 Timezone: <code>Asia/Kolkata</code>
+
+#{c}
+#Restart_{c}"""

@@ -56,12 +56,12 @@ class Bot(Client):
         await web.TCPSite(app, bind_address, PORT).start()
 
         await self.send_report_message()
-
+    
     async def send_report_message(self):
         while True:
             tz = pytz.timezone('Asia/Kolkata')
-            today = datetime.date.today()
-            now = datetime.datetime.now(tz)
+            today = date.today()
+            now = datetime.now(tz)
             formatted_date_1 = now.strftime("%d-%B-%Y")
             formatted_date_2 = today.strftime("%d %b")
             time = now.strftime("%H:%M:%S %p")

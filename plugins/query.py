@@ -228,8 +228,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton("Hᴇʟᴩ 🕸️", callback_data="help"),
             InlineKeyboardButton("Aʙᴏᴜᴛ ✨", callback_data="about")
         ]]
-        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), START_MESSAGE.format(user=query.from_user.mention, bot=client.mention), enums.ParseMode.HTML), reply_markup=InlineKeyboardMarkup(buttons))
-       
+        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME), enums.ParseMode.HTML), reply_markup=InlineKeyboardMarkup(buttons))
+        
     elif query.data == "help":
         buttons = [[
             InlineKeyboardButton('⚙️ Aᴅᴍɪɴ Pᴀɴᴇʟ ⚙️', 'admin')            

@@ -319,7 +319,7 @@ async def channel_info(bot, message):
 async def log_file(bot, message):
     """Send log file"""
     try:
-        await message.reply_document('Logs.txt')
+        await message.reply_document('BotLog.txt')
     except Exception as e:
         await message.reply(str(e))
         

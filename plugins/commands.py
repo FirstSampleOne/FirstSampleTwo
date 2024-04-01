@@ -34,6 +34,7 @@ logger = logging.getLogger(__name__)
 BATCH_FILES = {}
 RESULTS_PER_PAGE = 10
 
+
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
@@ -42,7 +43,14 @@ async def start(client, message):
             ],[
             InlineKeyboardButton('ℹ️ Hᴇʟᴩ ℹ️', url=f"https://t.me/{temp.U_NAME}?start=help")
         ]]
-        await message.reply(START_MESSAGE.format(user=message.from_user.mention if message.from_user else message.chat.title, bot=client.mention), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)                    
+        reply_markup = InlineKeyboardMarkup(buttons)
+        mention = message.from_user.mention if message.from_user else message.chat.title
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
         await asyncio.sleep(2)
         if not await db.get_chat(message.chat.id):
             total_members = await client.get_chat_members_count(message.chat.id)
@@ -81,9 +89,14 @@ async def start(client, message):
         ]
         m = await message.reply_sticker("CAACAgUAAxkBAAEBvlVk7YKnYxIHVnKW2PUwoibIR2ygGAACBAADwSQxMYnlHW4Ls8gQHgQ") 
         await asyncio.sleep(2)
-        await message.reply_photo(photo=random.choice(PICS), caption=START_MESSAGE.format(user=message.from_user.mention, bot=client.mention), reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.HTML)
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
         return await m.delete()
-        
     if AUTH_CHANNEL and not await is_subscribed(client, message):
         try:
             invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
@@ -126,11 +139,16 @@ async def start(client, message):
                 InlineKeyboardButton("📚 About", callback_data="about")
             ]
         ]
-        m = await message.reply_sticker("CAACAgUAAxkBAAEBvlVk7YKnYxIHVnKW2PUwoibIR2ygGAACBAADwSQxMYnlHW4Ls8gQHgQ")
+        m = await message.reply_sticker("CAACAgUAAxkBAAEBvlVk7YKnYxIHVnKW2PUwoibIR2ygGAACBAADwSQxMYnlHW4Ls8gQHgQ") 
         await asyncio.sleep(2)
-        await message.reply_photo(photo=random.choice(PICS), caption=START_MESSAGE.format(user=message.from_user.mention, bot=client.mention), reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.HTML)
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
         return await m.delete()
-        
     data = message.command[1]
     try:
         pre, file_id = data.split('_', 1)
@@ -220,7 +238,6 @@ async def start(client, message):
             await asyncio.sleep(1) 
         return await sts.delete()
         
-
     files_ = await get_file_details(file_id)           
     if not files_:
         pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
@@ -256,8 +273,8 @@ async def start(client, message):
         caption=f_caption, 
         protect_content=True if pre == 'filep' else False,
     )
-
-
+    
+    
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
     try:
@@ -296,8 +313,8 @@ async def channel_info(bot, message):
             os.remove(file)
     except Exception as e:
         await message.reply(f"An error occurred: {str(e)}")
-
-
+        
+        
 @Client.on_message(filters.command('logs') & filters.user(ADMINS))
 async def log_file(bot, message):
     """Send log file"""
@@ -305,8 +322,8 @@ async def log_file(bot, message):
         await message.reply_document('Logs.txt')
     except Exception as e:
         await message.reply(str(e))
-
-
+        
+        
 @Client.on_message(filters.command('delete') & filters.user(ADMINS))
 async def delete(bot, message):
     reply = message.reply_to_message
@@ -335,8 +352,8 @@ async def delete(bot, message):
             })
             if result.deleted_count: await msg.edit('File Is Successfully Deleted From Database')
             else: await msg.edit('File Not Found In Database')
-
-
+            
+            
 @Client.on_message(filters.command(['findfiles']) & filters.user(ADMINS))
 async def handle_find_files(client, message):
     """Find files in the database based on search criteria"""
@@ -381,8 +398,7 @@ async def handle_find_files(client, message):
     else:
         await message.reply('❌ No files found matching the search query.', quote=True)
         
-
-
+        
 @Client.on_callback_query(filters.regex('^related_files'))
 async def find_related_files(client, callback_query):
     data = callback_query.data.split(":")
@@ -421,8 +437,8 @@ async def find_related_files(client, callback_query):
 
     await callback_query.message.edit_text(result_message, reply_markup=keyboard)
     await callback_query.answer()
-
-
+    
+    
 @Client.on_callback_query(filters.regex('^starting_files'))
 async def find_starting_files(client, callback_query):
     data = callback_query.data.split(":")
@@ -461,8 +477,8 @@ async def find_starting_files(client, callback_query):
 
     await callback_query.message.edit_text(result_message, reply_markup=keyboard)
     await callback_query.answer()
-
-
+    
+    
 @Client.on_callback_query(filters.regex('^delete_related'))
 async def delete_related_files(client, callback_query):
     file_name = callback_query.data.split(":", 1)[1]
@@ -498,7 +514,8 @@ async def delete_related_files(client, callback_query):
         )
 
     await callback_query.message.edit_text(message_text, reply_markup=keyboard)
-
+    
+    
 @Client.on_callback_query(filters.regex('^confirm_delete_related'))
 async def confirm_delete_related_files(client, callback_query):
     file_name = callback_query.data.split(":", 1)[1]
@@ -518,8 +535,8 @@ async def confirm_delete_related_files(client, callback_query):
     )
 
     await callback_query.message.edit_text(confirmation_message, reply_markup=keyboard)
-
-
+    
+    
 @Client.on_callback_query(filters.regex('^delete_starting'))
 async def delete_starting_files(client, callback_query):
     file_name = callback_query.data.split(":", 1)[1]
@@ -556,7 +573,7 @@ async def delete_starting_files(client, callback_query):
 
     await callback_query.message.edit_text(message_text, reply_markup=keyboard)
     
-
+    
 @Client.on_callback_query(filters.regex('^confirm_delete_starting'))
 async def confirm_delete_starting_files(client, callback_query):
     file_name = callback_query.data.split(":", 1)[1]
@@ -576,8 +593,8 @@ async def confirm_delete_starting_files(client, callback_query):
     )
 
     await callback_query.message.edit_text(confirmation_message, reply_markup=keyboard)
-
-
+    
+    
 @Client.on_message(filters.command('deleteall') & filters.user(ADMINS))
 async def delete_all_index(bot, message):
     await message.reply_text(
@@ -598,16 +615,16 @@ async def delete_all_index(bot, message):
         ),
         quote=True,
     )
-
-
+    
+    
 @Client.on_callback_query(filters.regex(r'^autofilter_delete'))
 async def delete_all_index_confirm(bot, message):
     await Media.collection.drop()
     await Media2.collection.drop()
     await message.answer("Eᴠᴇʀʏᴛʜɪɴɢ's Gᴏɴᴇ")
     await message.message.edit('Sᴜᴄᴄᴇsғᴜʟʟʏ Dᴇʟᴇᴛᴇᴅ Aʟʟ Tʜᴇ Iɴᴅᴇxᴇᴅ Fɪʟᴇs.')
-
-
+    
+    
 @Client.on_message(filters.command('settings'))
 async def settings(client, message):
     userid = message.from_user.id if message.from_user else None
@@ -658,9 +675,8 @@ async def settings(client, message):
             disable_web_page_preview=True,
             parse_mode=enums.ParseMode.HTML,
         )
-
-
-
+        
+        
 @Client.on_message(filters.command('set_template'))
 async def save_template(client, message):
     sts = await message.reply("Cʜᴇᴄᴋɪɴɢ Tᴇᴍᴘʟᴀᴛᴇ")
@@ -692,8 +708,8 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Sᴜᴄᴄᴇssғᴜʟʟʏ Cʜᴀɴɢᴇᴅ Tᴇᴍᴘʟᴀᴛᴇ Fᴏʀ {title} Tᴏ\n\n{template}")
-
-
+    
+    
 @Client.on_message(filters.command('get_template'))
 async def geg_template(client, message):
     sts = await message.reply("Cʜᴇᴄᴋɪɴɢ Tᴇᴍᴘʟᴀᴛᴇ")
@@ -724,6 +740,4 @@ async def geg_template(client, message):
     settings = await get_settings(grp_id)
     template = settings['template']
     await sts.edit(f"Cᴜʀʀᴇɴᴛ Tᴇᴍᴘʟᴀᴛᴇ Fᴏʀ {title} Iꜱ\n\n{template}")
-
-
-
+    

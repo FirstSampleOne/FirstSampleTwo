@@ -487,12 +487,6 @@ async def imdb_callback(bot: Client, quer_y: CallbackQuery):
     else:
         await quer_y.message.edit(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
    
-   
-@Client.on_message(filters.command('logs') & filters.user(ADMINS))
-async def log_file(bot, msg):
-    try: await message.reply_document('BotLog.txt')
-    except Exception as e: await message.reply(str(e))
-
 
 @Client.on_message(filters.command("restart") & filters.user(ADMINS))
 async def restart_bot(bot, msg):
@@ -500,10 +494,4 @@ async def restart_bot(bot, msg):
     await asyncio.sleep(2)
     await sts.delete()
     os.execl(sys.executable, sys.executable, *sys.argv)
-
-
-
-        
-
-
-
+    

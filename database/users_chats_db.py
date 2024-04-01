@@ -54,7 +54,16 @@ class Database:
             'timestamp': {'$gte': start, '$lt': end}
         })
         return count
+
+    async def save_chat_invite_link(self, chat_id, invite_link):
+        await self.grp.update_one({'id': int(chat_id)}, {'$set': {'invite_link': invite_link}})
     
+    async def get_chat_invite_link(self, chat_id):
+        chat = await self.grp.find_one({'id': int(chat_id)})
+        if chat:
+            return chat.get('invite_link', None)
+        return None
+        
     async def add_user(self, id, name):
         user = self.new_user(id, name)
         await self.col.insert_one(user)

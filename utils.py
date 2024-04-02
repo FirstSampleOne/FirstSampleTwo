@@ -22,6 +22,7 @@ START_CHAR = ('\'', '"', SMART_OPEN)
 class temp(object):
     BANNED_USERS = []
     BANNED_CHATS = []
+    ME = None
     CURRENT = 0
     CANCEL = False
     MELCOW = {}

@@ -53,25 +53,25 @@ async def start(client, message):
         )
         await asyncio.sleep(2)
         if not await db.get_chat(message.chat.id):
-            total_members = await client.get_chat_members_count(message.chat.id)
-            total_chats = await db.total_chat_count() + 1
-            daily_chats = await db.daily_chats_count(today) + 1
             tz = pytz.timezone('Asia/Kolkata')
             now = datetime.now(tz)
             time = now.strftime('%I:%M:%S %p')
             today = now.date()
+            total_members = await client.get_chat_members_count(message.chat.id)
+            total_chats = await db.total_chat_count() + 1
+            daily_chats = await db.daily_chats_count(today) + 1
             await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(a=message.chat.title, b=message.chat.id, c=message.chat.username, d=total_members, e=total_chats, f=daily_chats, g=str(today), h=time, i="Unknown", j=temp.B_NAME, k=temp.U_NAME))
             await db.add_chat(message.chat.id, message.chat.title, message.chat.username)
         return
 
     if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        total_users = await db.total_users_count()
-        daily_users = await db.daily_users_count(today)
         tz = pytz.timezone('Asia/Kolkata')
         now = datetime.now(tz)
-        time = now.strftime('%I:%M:%S %p')
         today = now.date()
+        time = now.strftime('%I:%M:%S %p')
+        total_users = await db.total_users_count() + 1
+        daily_users = await db.daily_users_count(today) + 1
+        await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(a=message.from_user.id, b=message.from_user.mention, c=message.from_user.username, d=total_users, e=daily_users, f=str(today), g=time, h=temp.B_NAME, i=temp.U_NAME))
     if len(message.command) != 2:
         buttons = [

@@ -25,6 +25,7 @@ class temp(object):
     ME = None
     CURRENT = 0
     CANCEL = False
+    USERS_CANCEL = False
     MELCOW = {}
     U_NAME = None
     B_NAME = None

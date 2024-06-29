@@ -3,7 +3,6 @@ import math
 import logging
 from datetime import date, datetime 
 import pytz
-import asyncio
 import pytz
 from typing import Union, Optional, AsyncGenerator
 
@@ -18,8 +17,14 @@ from utils import temp
 from plugins import web_server
 from Script import script 
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+import logging
+import logging.config
+import asyncio
+
+# Get logging configurations
+logging.config.fileConfig('logging.conf')
+logging.getLogger().setLevel(logging.INFO)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 class Bot(Client):
     def __init__(self):

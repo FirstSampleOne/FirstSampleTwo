@@ -5,6 +5,7 @@ import pytz
 from aiohttp import web
 from pyrogram import Client
 from pyrogram.errors import BadRequest, Unauthorized
+from typing import Union, Optional, AsyncGenerator
 
 from database.ia_filterdb import Media
 from database.users_chats_db import db

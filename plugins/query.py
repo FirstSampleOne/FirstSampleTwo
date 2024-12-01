@@ -154,6 +154,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer(alert, show_alert=True)
     
     if query.data.startswith("pmfile"):
+        clicked = query.from_user.id
+        try:
+            typed = query.message.reply_to_message.from_user.id
+        except:
+            typed = query.from_user.id
         ident, file_id = query.data.split("#")
         files_ = await get_file_details(file_id)
         if not files_: return await query.answer('No Such File Exist.')
@@ -189,7 +194,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except Exception as e:
             await query.answer(f"⚠️ Eʀʀᴏʀ {e}", show_alert=True)
     
-    elif query.data.startswith("file"):        
+    elif query.data.startswith("file"):   
+        clicked = query.from_user.id
+        try:
+            typed = query.message.reply_to_message.from_user.id
+        except:
+            typed = query.from_user.id
         ident, req, file_id = query.data.split("#")
         if BUTTON_LOCK:
             if int(req) not in [query.from_user.id, 0]:

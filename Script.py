@@ -296,7 +296,17 @@ Wᴇʟᴄᴏᴍᴇ ᴛᴏ {chat}.
 📆 Year: <a href={url}/releaseinfo>{year}</a>
 🌟 Rating: <a href={url}/ratings>{rating}</a>/10
 """
+    VERIFY_MSG = """
+Hey {a}💕 
 
+Temporary Token has been expired, Kindly generate Temp Token to start using bots Again. And Get access of unlimited Movies For Next 12 Hours.
+
+Validity :- 12 hours"""
+    VERIFY_SUC = """
+Congratulations {a}! Ads Token Refreshed Successfully! Now Enjoy Bot Without any Ads and Access Unlimited Movies For Next 12 Hours.
+
+It Will Expire After 12 hours."""
+    
     RESTART_TXT = """#Restarted
 
 🔄 Bot Restarted!

@@ -1,4 +1,5 @@
 import asyncio, re, ast, math, logging, pyrogram, random
+import random 
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 from utils import get_shortlink 

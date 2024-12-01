@@ -17,7 +17,7 @@ from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.connections_mdb import active_connection
 
 from Script import script
-from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
+from utils import get_settings, get_size, is_subscribed, save_group_settings, temp, verify_user, check_token, check_verification, get_token
 from info import (
     PICS,
     ADMINS,
@@ -28,7 +28,11 @@ from info import (
     UPDATE_CHANNEL, 
     BATCH_FILE_CAPTION, 
     CUSTOM_FILE_CAPTION, 
-    PROTECT_CONTENT
+    PROTECT_CONTENT,
+    IS_VERIFY, 
+    HOW_TO_VERIFY, 
+    CHNL_LNK, 
+    GRP_LNK
 )
 
 logger = logging.getLogger(__name__)

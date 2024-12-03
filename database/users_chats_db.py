@@ -64,9 +64,8 @@ class Database:
             return chat.get('invite_link', None)
         return None
 
-    async def update_verification(self, id, short, date, time):
+    async def update_verification(self, id, date, time):
         status = {
-            'short': str(short),
             'date': str(date),
             'time': str(time)
         }
@@ -74,7 +73,6 @@ class Database:
     
     async def get_verified(self, id):
         default = {
-            'short': "1",
             'date': "1999-12-31",
             'time': "23:59:59"
         }
